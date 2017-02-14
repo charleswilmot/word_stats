@@ -31,7 +31,7 @@ def get_word_freq(txt, word_end_set=punc):
     
     word_freq.values(): frequency of all the words in txt
     
-    word_frek.keys(): all the words in txt, splited by spaces and all
+    word_freq.keys(): all the words in txt, splited by spaces and all
                       characters in word_end_set (set to 
                       string.punctuation by default), sorted by 
                       word_freq.values()
