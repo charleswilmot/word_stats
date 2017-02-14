@@ -43,49 +43,64 @@ def get_word_freq(txt, word_end_set=punc):
 
 	return word_freq.values(), word_freq.keys()
 
-class LineWiseFrameIterator:
-    """
-    usage:
 
-    for frame in LineWiseFrameIterator('../data/bible/xxx.txt', 1000, 500):
-        print(frame)
-    """
+class LineWiseFrameIterator:
 
     def __init__(self, filepath, frame_size, frame_overlap):
         #frame_size expressed in number of lines
-        pass
+        self.filepath = filepath
+        self.frame_size = frame_size
+        self.frame_overlap = frame_overlap
+        self.filepath = filepath
+        self.i = 0
+        with open(filepath, 'r') as myfile:
+            self.data = myfile.readlines()
+        self.len = len(self.data)
 
-    def __iter__(self) :
-        pass
+    def __iter__(self):
+        return self
 
-    def next(self) :
-        pass
+    def __next__(self) :
+        end = self.i + self.frame_size
+        if self.i > self.len:
+            raise StopIteration()
+        if end < self.len:
+            ret = self.data[self.i:end]
+        else:
+            ret = self.data[self.i:-1]
+        self.i += self.frame_size - self.frame_overlap
+        return ''.join(ret)
 
 
 class CharWiseFrameIterator:
-    """
-    usage:
-
-    for frame in LineWiseFrameIterator('../data/bible/xxx.txt', 1000, 500):
-        print(frame)
-    """
-
     def __init__(self, filepath, frame_size, frame_overlap):
-        #frame_size expressed in number of char
-        pass
+        self.filepath = filepath
+        self.frame_size = frame_size
+        self.frame_overlap = frame_overlap
+        self.filepath = filepath
+        self.i = 0
+        with open(filepath, 'r') as myfile:
+            self.data = myfile.read().replace('\n','').replace('\r','')
+        self.len = len(self.data)
 
-    def __iter__(self) :
-        pass
+    def __iter__(self):
+        return self
 
-    def next(self) :
-        pass
+    def __next__(self) :
+        end = self.i + self.frame_size
+        if self.i > self.len:
+            raise StopIteration()
+        if end < self.len:
+            ret = self.data[self.i:end]
+        else:
+            ret = self.data[self.i:-1]
+        self.i += self.frame_size - self.frame_overlap
+        return ret
+
 
 
 def entropy(freq_tab):
-    """
-    returns the entropy
-    """
-    pass
+    return np.sum(np.log(freq_tab)*freq_tab)
 
 def get_letter_entropy(txt, n, letters_set):
     return entropy(get_letter_freq(txt, n, letters_set))
