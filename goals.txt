@@ -1,0 +1,19 @@
+Books database
+
+Classifying books 
+Word counting 
+
+txt file -> word frequency // pairs, triples, etc of letters // 
+
+- preprocessing and segmenting
+Removing weird characters (\t, \n, pagenumbers, etc...)
+Slicing arrays
+putting everything lowercase
+python package with all the possible letters
+
+- actually producing the frequency
+function that receives the .txt as input and returns word/letter/etc counts (arrays of letters and word frequencies)
+how likely it is for one letter to follow another
+
+- analysing the frequencies
+comparing these frequencies and concluding stuff
