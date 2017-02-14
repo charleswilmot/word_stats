@@ -1,15 +1,28 @@
 import numpy as np
-
+import intertools as it
 
 
 def get_letter_freq(txt, n, letters_set):
     """
-    return an array of size len(letters_set)^n  which contains the freq of the
-    "n letters combination" in txt letters not present in letter_set are ignored
+    return 2 arrays:
+    
+    comb_freq: is an array of size len(letters_set)^n  which contains
+    the freq of the "n letters combination" in txt letters not present 
+    in letter_set are ignored
+    
+    comb: array of size len(letters_set)^n which contains the 
+    "n letters combinations", in the same order as comb_freq
+    
     example: n=3       letter_set='abc'
-             aaa aab aac aba abb abc aca acb acc baa bab bac bba bbb bbc bca ...
+    aaa aab aac aba abb abc aca acb acc baa bab bac bba bbb bbc bca ...
     """
-    pass
+    
+    comb = []
+	for i in it.product(letters_set, repeat=n):
+		comb.append(''.join(map(str, i)))
+	comb_freq = txt.count(combinations)
+	
+    return comb_freq, comb
 
 def get_word_freq(txt, word_end_set):
     """
