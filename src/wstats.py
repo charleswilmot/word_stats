@@ -36,7 +36,8 @@ def get_word_freq(txt, word_end_set=punc):
                       string.punctuation by default), sorted by 
                       word_freq.values()
     """
-	words = Counter(''.join([c for c in txt if not c in word_end_set])\
+    
+    words = Counter(''.join([c for c in txt if not c in word_end_set])\
 	                                                           .split())
 	word_freq = OrderedDict(sorted(charcount.items(), \
 	                                               key=lambda t: -t[1]))	
