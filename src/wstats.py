@@ -7,23 +7,35 @@ def get_letter_freq(txt, n, letters_set):
     """
     Return 2 lists:
 
-    comb_freq: is a list of size len(letters_set)^n  which contains
-               the freq of the "n letters combination" in txt letters
-               not present in letter_set are ignored
+    sorted_comb_freq: is a list of size len(letters_set)^n  which
+                      contains the freq of the "n letters combination"
+                      in txt letters not present in letter_set are
+                      ignored
 
-    comb: list of size len(letters_set)^n which contains the "n letters
-          combinations", in the same order as comb_freq
+    sorted_comb: list of size len(letters_set)^n which contains the
+                 "n letters combinations", in the same order as
+                 comb_freq
 
     example: n=3       letter_set='abc'
     aaa aab aac aba abb abc aca acb acc baa bab bac bba bbb bbc bca ...
     """
 
     comb = []
-	for i in it.product(letters_set, repeat=n):
+    for i in it.product(letters_set, repeat=n):
 		comb.append(''.join(map(str, i)))
-	comb_freq = txt.count(combinations)
 
-    return comb_freq, comb
+	comb_freq = []
+	for c in comb:
+		comb_freq.append(txt.count(comb))
+
+	# sort and converts to numpy arrays
+	comb_freq = np.array(comb_freq)
+	comb = np.array(comb)
+	inds = comb_freq.argsort()[::-1]
+	sorted_comb_freq = comb_freq[inds]
+	sorted_comb = comb[inds]
+
+    return sorted_comb_freq, sorted_comb
 
 def get_word_freq(txt, word_end_set=punc):
     """
@@ -31,17 +43,18 @@ def get_word_freq(txt, word_end_set=punc):
 
     word_freq.values(): frequency of all the words in txt
 
-    word_frek.keys(): all the words in txt, splited by spaces and all
+    word_freq.keys(): all the words in txt, splited by spaces and all
                       characters in word_end_set (set to
                       string.punctuation by default), sorted by
                       word_freq.values()
     """
-	words = Counter(''.join([c for c in txt if not c in word_end_set])\
+
+    words = Counter(''.join([c for c in txt if not c in word_end_set])\
 	                                                           .split())
-	word_freq = OrderedDict(sorted(charcount.items(), \
+    word_freq = OrderedDict(sorted(charcount.items(), \
 	                                               key=lambda t: -t[1]))
 
-	return word_freq.values(), word_freq.keys()
+    return word_freq.values(), word_freq.keys()
 
 
 class LineWiseFrameIterator:
