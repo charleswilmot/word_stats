@@ -20,8 +20,8 @@ def get_letter_freq(txt, n, letters_set):
     
     comb = []
     for i in it.product(letters_set, repeat=n):
-	comb.append(''.join(map(str, i)))
-    comb_freq = txt.count(combinations)
+		comb.append(''.join(map(str, i)))
+    comb_freq = txt.count(comb)
 	
     return comb_freq, comb
 
