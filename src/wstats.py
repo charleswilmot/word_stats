@@ -19,9 +19,9 @@ def get_letter_freq(txt, n, letters_set):
     """
     
     comb = []
-	for i in it.product(letters_set, repeat=n):
-		comb.append(''.join(map(str, i)))
-	comb_freq = txt.count(combinations)
+    for i in it.product(letters_set, repeat=n):
+	comb.append(''.join(map(str, i)))
+    comb_freq = txt.count(combinations)
 	
     return comb_freq, comb
 
@@ -39,10 +39,10 @@ def get_word_freq(txt, word_end_set=punc):
     
     words = Counter(''.join([c for c in txt if not c in word_end_set])\
 	                                                           .split())
-	word_freq = OrderedDict(sorted(charcount.items(), \
+    word_freq = OrderedDict(sorted(charcount.items(), \
 	                                               key=lambda t: -t[1]))	
 	
-	return word_freq.values(), word_freq.keys()
+    return word_freq.values(), word_freq.keys()
 
 class LineWiseFrameIterator:
     """
