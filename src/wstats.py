@@ -16,16 +16,35 @@ def get_word_freq(txt, word_end_set):
     return word freq
     """
 
-class FrameIterator:
+class LineWiseFrameIterator:
     """
     usage:
 
-    for frame in FrameIterator('../data/bible/xxx.txt', 1000, 500):
+    for frame in LineWiseFrameIterator('../data/bible/xxx.txt', 1000, 500):
         print(frame)
     """
-    current = 0
 
     def __init__(self, filepath, frame_size, frame_overlap):
+        #frame_size expressed in number of lines
+        pass
+
+    def __iter__(self) :
+        pass
+
+    def next(self) :
+        pass
+
+
+class CharWiseFrameIterator:
+    """
+    usage:
+
+    for frame in LineWiseFrameIterator('../data/bible/xxx.txt', 1000, 500):
+        print(frame)
+    """
+
+    def __init__(self, filepath, frame_size, frame_overlap):
+        #frame_size expressed in number of char
         pass
 
     def __iter__(self) :
