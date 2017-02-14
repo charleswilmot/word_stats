@@ -15,6 +15,7 @@ def get_word_freq(txt, word_end_set):
     """
     return word freq
     """
+    pass
 
 class LineWiseFrameIterator:
     """
